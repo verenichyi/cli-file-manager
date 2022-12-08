@@ -9,17 +9,20 @@ export const validateLine = (line) => {
 
 	switch (command) {
 		case 'up':
-		case 'ls':
+		case 'ls': {
 			if (!args.length) {
 				return;
 			}
 			break;
+		}
 		case 'cd':
 		case 'os':
+		case 'hash':{
 			if (args.length === 1) {
 				return;
 			}
 			break;
+		}
 	}
 
 	throw new SyntaxError(validationErrorMsg);

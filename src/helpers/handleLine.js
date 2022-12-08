@@ -4,28 +4,38 @@ import { validateLine } from './validateLine.js';
 import { executionErrorMsg } from '../constants.js';
 import { getCwdMsg } from './getCwdMsg.js';
 import { os } from '../domains/os/index.js';
+import { calcHash } from '../domains/hash/index.js';
 
-export const handleLine = (line) => {
+export const handleLine = async (line) => {
 	try {
 		const properLine = removeUnnecessarySpaces(line);
 		validateLine(properLine);
 		const [command, ...args] = properLine.split(' ');
 
 		switch (command) {
-			case 'up':
+			case 'up': {
 				up();
 				break;
-			case 'cd':
+			}
+			case 'cd': {
 				const [path] = args;
 				cd(path);
 				break;
-			case 'ls':
-				ls();
+			}
+			case 'ls': {
+				await ls();
 				break;
-			case 'os':
+			}
+			case 'os': {
 				const [arg] = args;
-				os(arg);
+				await os(arg);
 				break;
+			}
+			case 'hash': {
+				const [path] = args;
+				await calcHash(path);
+				break;
+			}
 		}
 	} catch (error) {
 		if (error instanceof SyntaxError) {
