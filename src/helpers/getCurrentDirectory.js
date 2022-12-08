@@ -1,1 +1,0 @@
-export const getCurrentDirectory = () => `You are currently in ${process.cwd()}\n`;
