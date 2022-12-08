@@ -15,6 +15,7 @@ export const validateLine = (line) => {
 			}
 			break;
 		case 'cd':
+		case 'os':
 			if (args.length === 1) {
 				return;
 			}
