@@ -1,22 +1,25 @@
 import { EOL, homedir, userInfo, arch } from 'node:os';
 import { handleCpus } from './handleCpus.js';
+import { validationErrorMsg } from '../../constants.js';
 
-export const os = async (arg) => {
+export const handleOs = async (arg) => {
 	switch (arg) {
 		case '--EOL':
 			console.log(JSON.stringify(EOL));
-			break;
+			return;
 		case '--cpus':
 			handleCpus();
-			break;
+			return;
 		case '--homedir':
 			console.log(homedir());
-			break;
+			return;
 		case '--username':
 			console.log(userInfo().username);
-			break;
+			return;
 		case '--architecture':
 			console.log(arch());
-			break;
+			return;
 	}
+
+	throw new SyntaxError(validationErrorMsg)
 };

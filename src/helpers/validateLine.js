@@ -1,5 +1,5 @@
 import { commandsList, validationErrorMsg } from '../constants.js';
-
+// should be const validateLine = (command: string, args: arg[]):void => {}
 export const validateLine = (line) => {
 	const [command, ...args] = line.split(' ');
 

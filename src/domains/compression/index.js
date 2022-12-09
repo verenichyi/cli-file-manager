@@ -1,0 +1,1 @@
+export { handleCompression } from './handleCompression.js';

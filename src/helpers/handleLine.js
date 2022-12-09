@@ -1,16 +1,20 @@
 import { up, cd, ls } from '../domains/nwd/index.js';
 import { removeUnnecessarySpaces } from './removeUnnecessarySpaces.js';
 import { validateLine } from './validateLine.js';
-import { executionErrorMsg } from '../constants.js';
+import { compressionFlags, executionErrorMsg } from '../constants.js';
 import { getCwdMsg } from './getCwdMsg.js';
-import { os } from '../domains/os/index.js';
+import { handleOs } from '../domains/os/index.js';
 import { calcHash } from '../domains/hash/index.js';
+import { handleCompression } from '../domains/compression/index.js';
+
+const { decompress } = compressionFlags;
 
 export const handleLine = async (line) => {
 	try {
 		const properLine = removeUnnecessarySpaces(line);
-		validateLine(properLine);
-		const [command, ...args] = properLine.split(' ');
+		// implement const parseLine = (line: string):(command, arg[])[]=>{}
+		// validateLine(command: string, args: arg[]);
+		const [ command, ...args ] = properLine.split(' ');
 
 		switch (command) {
 			case 'up': {
@@ -18,7 +22,7 @@ export const handleLine = async (line) => {
 				break;
 			}
 			case 'cd': {
-				const [path] = args;
+				const [ path ] = args;
 				cd(path);
 				break;
 			}
@@ -27,13 +31,23 @@ export const handleLine = async (line) => {
 				break;
 			}
 			case 'os': {
-				const [arg] = args;
-				await os(arg);
+				const [ arg ] = args;
+				await handleOs(arg);
 				break;
 			}
 			case 'hash': {
-				const [path] = args;
-				await calcHash(path);
+				const [ file ] = args;
+				await calcHash(file);
+				break;
+			}
+			case 'compress': {
+				const [ file, dest ] = args;
+				await handleCompression(file, dest);
+				break;
+			}
+			case 'decompress': {
+				const [ file, dest ] = args;
+				await handleCompression(file, dest, decompress);
 				break;
 			}
 		}

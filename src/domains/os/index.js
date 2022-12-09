@@ -1,1 +1,1 @@
-export { os } from './os.js';
+export { handleOs } from './handleOs.js';

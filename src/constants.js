@@ -17,3 +17,8 @@ export const commandsList = [
 	'compress',
 	'decompress'
 ];
+export const compressionFlags = {
+	compress: 'co',
+	decompress: 'deco'
+};
+export const brotliExtension = '.br';
