@@ -1,5 +1,4 @@
 import { up, cd, ls } from '../domains/nwd/index.js';
-import { removeUnnecessarySpaces } from './removeUnnecessarySpaces.js';
 import { validateLine } from './validateLine.js';
 import { compressionFlags, executionErrorMsg } from '../constants.js';
 import { getCwdMsg } from './getCwdMsg.js';
@@ -7,15 +6,14 @@ import { handleOs } from '../domains/os/index.js';
 import { calcHash } from '../domains/hash/index.js';
 import { handleCompression } from '../domains/compression/index.js';
 import { cat, add, rn, move, rm } from '../domains/files/index.js';
+import { parseLine } from './index.js';
 
 const { decompress } = compressionFlags;
 
 export const handleLine = async (line) => {
 	try {
-		const properLine = removeUnnecessarySpaces(line);
-		// implement const parseLine = (line: string):(command, arg[])[]=>{}
+		const [ command, args ] = parseLine(line);
 		// validateLine(command: string, args: arg[]);
-		const [ command, ...args ] = properLine.split(' ');
 
 		switch (command) {
 			case 'up': {
@@ -23,8 +21,7 @@ export const handleLine = async (line) => {
 				break;
 			}
 			case 'cd': {
-				const [ path ] = args;
-				cd(path);
+				cd(...args);
 				break;
 			}
 			case 'ls': {
@@ -32,53 +29,43 @@ export const handleLine = async (line) => {
 				break;
 			}
 			case 'cat': {
-				const [ pathToFile ] = args;
-				await cat(pathToFile);
+				await cat(...args);
 				break;
 			}
 			case 'add': {
-				const [ filename ] = args;
-				await add(filename);
+				await add(...args);
 				break;
 			}
 			case 'rn': {
-				const [ pathToFile, newFilename ] = args;
-				await rn(pathToFile, newFilename);
+				await rn(...args);
 				break;
 			}
 			case 'cp': {
-				const [ pathToFile, pathToNewDirectory ] = args;
-				await move(pathToFile, pathToNewDirectory, true);
+				await move(...args, true);
 				break;
 			}
 			case 'mv': {
-				const [ pathToFile, pathToNewDirectory ] = args;
-				await move(pathToFile, pathToNewDirectory);
+				await move(...args);
 				break;
 			}
 			case 'rm': {
-				const [ pathToFile ] = args;
-				await rm(pathToFile);
+				await rm(...args);
 				break;
 			}
 			case 'os': {
-				const [ arg ] = args;
-				await handleOs(arg);
+				await handleOs(...args);
 				break;
 			}
 			case 'hash': {
-				const [ path ] = args;
-				await calcHash(path);
+				await calcHash(...args);
 				break;
 			}
 			case 'compress': {
-				const [ src, dest ] = args;
-				await handleCompression(src, dest);
+				await handleCompression(...args);
 				break;
 			}
 			case 'decompress': {
-				const [ src, dest ] = args;
-				await handleCompression(src, dest, decompress);
+				await handleCompression(...args, decompress);
 				break;
 			}
 		}

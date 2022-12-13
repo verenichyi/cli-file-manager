@@ -1,5 +1,4 @@
-import { closeProcess } from './closeProcess.js';
-import { handleLine } from './handleLine.js';
+import { closeProcess, handleLine } from './index.js';
 
 export const handleStdinOnData = async (chunk, message) => {
 	const chunkStringified = chunk.toString().trim();

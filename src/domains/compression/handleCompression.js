@@ -2,7 +2,7 @@ import { createReadStream, createWriteStream } from 'node:fs';
 import { createBrotliCompress, createBrotliDecompress } from 'node:zlib';
 import { pipeline } from 'node:stream/promises';
 import { compressionFlags } from '../../constants.js';
-import { parseArgs } from './parseArgs.js';
+import { parseArgs } from './index.js';
 
 const { compress, decompress } = compressionFlags;
 

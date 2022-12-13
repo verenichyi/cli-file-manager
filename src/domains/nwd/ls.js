@@ -1,5 +1,5 @@
 import { readdir } from 'node:fs/promises';
-import { sortByField } from '../../helpers/sortByField.js';
+import { sortByField } from '../../helpers/index.js';
 
 export const ls = async () => {
 	const cwd = process.cwd();

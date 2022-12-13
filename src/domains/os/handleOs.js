@@ -1,5 +1,5 @@
 import { EOL, homedir, userInfo, arch } from 'node:os';
-import { handleCpus } from './handleCpus.js';
+import { handleCpus } from './index.js';
 import { validationErrorMsg } from '../../constants.js';
 
 export const handleOs = async (arg) => {
@@ -21,5 +21,5 @@ export const handleOs = async (arg) => {
 			return;
 	}
 
-	throw new SyntaxError(validationErrorMsg)
+	throw new SyntaxError(validationErrorMsg);
 };

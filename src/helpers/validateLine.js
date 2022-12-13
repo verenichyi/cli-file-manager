@@ -1,7 +1,7 @@
 import { commandsList, validationErrorMsg } from '../constants.js';
-// should be const validateLine = (command: string, args: arg[]):void => {}
+
 export const validateLine = (line) => {
-	const [command, ...args] = line.split(' ');
+	const [ command, ...args ] = line.split(' ');
 
 	if (!commandsList.includes(command)) {
 		throw new SyntaxError(validationErrorMsg);
@@ -17,7 +17,7 @@ export const validateLine = (line) => {
 		}
 		case 'cd':
 		case 'os':
-		case 'hash':{
+		case 'hash': {
 			if (args.length === 1) {
 				return;
 			}
