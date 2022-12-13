@@ -6,6 +6,7 @@ import { getCwdMsg } from './getCwdMsg.js';
 import { handleOs } from '../domains/os/index.js';
 import { calcHash } from '../domains/hash/index.js';
 import { handleCompression } from '../domains/compression/index.js';
+import { cat, add } from '../domains/files/index.js';
 
 const { decompress } = compressionFlags;
 
@@ -36,18 +37,28 @@ export const handleLine = async (line) => {
 				break;
 			}
 			case 'hash': {
-				const [ file ] = args;
-				await calcHash(file);
+				const [ path ] = args;
+				await calcHash(path);
 				break;
 			}
 			case 'compress': {
-				const [ file, dest ] = args;
-				await handleCompression(file, dest);
+				const [ src, dest ] = args;
+				await handleCompression(src, dest);
 				break;
 			}
 			case 'decompress': {
-				const [ file, dest ] = args;
-				await handleCompression(file, dest, decompress);
+				const [ src, dest ] = args;
+				await handleCompression(src, dest, decompress);
+				break;
+			}
+			case 'cat': {
+				const [ path ] = args;
+				await cat(path);
+				break;
+			}
+			case 'add': {
+				const [ filename ] = args;
+				await add(filename);
 				break;
 			}
 		}

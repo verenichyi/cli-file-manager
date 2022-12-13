@@ -3,9 +3,9 @@ import { brotliExtension, compressionFlags } from '../../constants.js';
 
 const { compress, decompress } = compressionFlags;
 
-export const parseArgs = (file, dest, flag) => {
+export const parseArgs = (src, dest, flag) => {
 	let resolvedDestPath;
-	const resolvedFilePath = resolve(file);
+	const resolvedFilePath = resolve(src);
 	const { name, ext } = parse(resolvedFilePath);
 
 	switch (flag) {
@@ -17,5 +17,5 @@ export const parseArgs = (file, dest, flag) => {
 			break;
 	}
 
-	return [resolvedFilePath, resolvedDestPath];
+	return [ resolvedFilePath, resolvedDestPath ];
 };

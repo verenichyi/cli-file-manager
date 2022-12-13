@@ -3,7 +3,7 @@ import { sortByField } from '../../helpers/sortByField.js';
 
 export const ls = async () => {
 	const cwd = process.cwd();
-	const cwdEntities = await readdir(cwd, {withFileTypes: true});
+	const cwdEntities = await readdir(cwd, { withFileTypes: true });
 	const files = [];
 	const directories = [];
 
