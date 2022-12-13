@@ -17,6 +17,3 @@ export const move = async (pathToFile, pathToNewDirectory, isSrcRemain = false) 
 		await unlink(resolvedPathToFile);
 	}
 };
-
-console.log(resolve('test/test.txt'));
-console.log(resolve('..', 'test.txt'));

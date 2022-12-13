@@ -6,7 +6,7 @@ import { getCwdMsg } from './getCwdMsg.js';
 import { handleOs } from '../domains/os/index.js';
 import { calcHash } from '../domains/hash/index.js';
 import { handleCompression } from '../domains/compression/index.js';
-import { cat, add, rn, move } from '../domains/files/index.js';
+import { cat, add, rn, move, rm } from '../domains/files/index.js';
 
 const { decompress } = compressionFlags;
 
@@ -29,26 +29,6 @@ export const handleLine = async (line) => {
 			}
 			case 'ls': {
 				await ls();
-				break;
-			}
-			case 'os': {
-				const [ arg ] = args;
-				await handleOs(arg);
-				break;
-			}
-			case 'hash': {
-				const [ path ] = args;
-				await calcHash(path);
-				break;
-			}
-			case 'compress': {
-				const [ src, dest ] = args;
-				await handleCompression(src, dest);
-				break;
-			}
-			case 'decompress': {
-				const [ src, dest ] = args;
-				await handleCompression(src, dest, decompress);
 				break;
 			}
 			case 'cat': {
@@ -74,6 +54,31 @@ export const handleLine = async (line) => {
 			case 'mv': {
 				const [ pathToFile, pathToNewDirectory ] = args;
 				await move(pathToFile, pathToNewDirectory);
+				break;
+			}
+			case 'rm': {
+				const [ pathToFile ] = args;
+				await rm(pathToFile);
+				break;
+			}
+			case 'os': {
+				const [ arg ] = args;
+				await handleOs(arg);
+				break;
+			}
+			case 'hash': {
+				const [ path ] = args;
+				await calcHash(path);
+				break;
+			}
+			case 'compress': {
+				const [ src, dest ] = args;
+				await handleCompression(src, dest);
+				break;
+			}
+			case 'decompress': {
+				const [ src, dest ] = args;
+				await handleCompression(src, dest, decompress);
 				break;
 			}
 		}
