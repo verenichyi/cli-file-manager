@@ -12,8 +12,8 @@ const createWs = () => {
 	});
 };
 
-export const cat = async (path) => {
-	const resolvedPath = resolve(path);
+export const cat = async (pathToFile) => {
+	const resolvedPath = resolve(pathToFile);
 	const rs = createReadStream(resolvedPath);
 
 	await pipeline(rs, createWs());
