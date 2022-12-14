@@ -1,10 +1,11 @@
 import { createReadStream, createWriteStream } from 'node:fs';
-import { unlink } from 'node:fs/promises';
+import { unlink, access } from 'node:fs/promises';
 import { parse, resolve } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 
 export const move = async (pathToFile, pathToNewDirectory, isSrcRemain = false) => {
 	const resolvedPathToFile = resolve(pathToFile);
+	await access(resolvedPathToFile);
 	const { base } = parse(resolvedPathToFile);
 	const resolvedPathToNewFile = resolve(pathToNewDirectory, base);
 
