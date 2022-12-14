@@ -3,17 +3,17 @@ import { brotliExtension, compressionFlags } from '../../constants.js';
 
 const { compress, decompress } = compressionFlags;
 
-export const parseArgs = (src, dest, flag) => {
+export const parseArgs = (pathToFile, pathToDestination, flag) => {
 	let resolvedDestPath;
-	const resolvedFilePath = resolve(src);
+	const resolvedFilePath = resolve(pathToFile);
 	const { name, ext } = parse(resolvedFilePath);
 
 	switch (flag) {
 		case compress:
-			resolvedDestPath = resolve(dest, `${name}${ext}${brotliExtension}`);
+			resolvedDestPath = resolve(pathToDestination, `${name}${ext}${brotliExtension}`);
 			break;
 		case decompress:
-			resolvedDestPath = resolve(dest, name);
+			resolvedDestPath = resolve(pathToDestination, name);
 			break;
 	}
 

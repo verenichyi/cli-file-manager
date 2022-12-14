@@ -1,4 +1,4 @@
-const splitByPairedQuotes = (str) => str.split(/["']+.["']/);
+const splitByPairedQuotes = (str) => str.split(/["'] | ["']/);
 const removeItemUnnecessaryQuotes = (arr) => arr.map((arg) => arg.replace(/["']/g, ''));
 
 export const parseLine = (line) => {

@@ -6,8 +6,8 @@ import { parseArgs } from './index.js';
 
 const { compress, decompress } = compressionFlags;
 
-export const handleCompression = async (src, dest, flag = compress) => {
-	const [ srcFile, destFile ] = parseArgs(src, dest, flag);
+export const handleCompression = async (pathToFile, pathToDestination, flag = compress) => {
+	const [ srcFile, destFile ] = parseArgs(pathToFile, pathToDestination, flag);
 
 	let brotli;
 	const rs = createReadStream(srcFile);

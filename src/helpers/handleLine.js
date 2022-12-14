@@ -1,19 +1,18 @@
 import { up, cd, ls } from '../domains/nwd/index.js';
-import { validateLine } from './validateLine.js';
-import { compressionFlags, executionErrorMsg } from '../constants.js';
 import { getCwdMsg } from './getCwdMsg.js';
 import { handleOs } from '../domains/os/index.js';
 import { calcHash } from '../domains/hash/index.js';
 import { handleCompression } from '../domains/compression/index.js';
 import { cat, add, rn, move, rm } from '../domains/files/index.js';
-import { parseLine } from './index.js';
+import { parseLine, validateLine } from './index.js';
+import { compressionFlags, executionErrorMsg } from '../constants.js';
 
 const { decompress } = compressionFlags;
 
 export const handleLine = async (line) => {
 	try {
 		const [ command, args ] = parseLine(line);
-		// validateLine(command: string, args: arg[]);
+		validateLine(command, args);
 
 		switch (command) {
 			case 'up': {
